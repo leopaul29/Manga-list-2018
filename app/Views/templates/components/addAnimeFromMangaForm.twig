@@ -1,0 +1,34 @@
+<div class="form-group">
+    <label for="title_original">Title original</label>
+    <input type="text" class="form-control" id="title_original" name="title_original"
+           placeholder="Title original">
+</div>
+<div class="form-group">
+    <label for="saison">Saison</label>
+    <input type="number" class="form-control" id="saison" name="saison" placeholder="0" value="1"
+           min="0">
+</div>
+<div class="form-group">
+    <label for="nb_episodes">Episodes</label>
+    <input type="number" class="form-control" id="nb_episodes" name="nb_episodes" placeholder="0"
+           value="0" min="0">
+</div>
+<div class="form-group">
+    <label for="nb_film">Film</label>
+    <input type="number" class="form-control" id="nb_film" name="nb_film" placeholder="0" value="0"
+           min="0">
+</div>
+<div class="form-group">
+    <label for="nb_oav">OAV</label>
+    <input type="number" class="form-control" id="nb_oav" name="nb_oav" placeholder="0" value="0"
+           min="0">
+</div>
+
+<div class="form-group">
+    <label for="status">Status</label>
+    <select class="form-control" id="status" name="status">
+        {% for i in [3,2,5,4,1] %}
+            <option value="{{ i }}">{{ labelStatus(i) }}</option>
+        {% endfor %}
+    </select>
+</div>

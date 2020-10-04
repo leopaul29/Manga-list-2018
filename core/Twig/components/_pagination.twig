@@ -1,0 +1,58 @@
+{% if pagination.active %}
+<nav aria-label="Page navigation" class="text-center {{ pagination.cssClass }}">
+  <ul class="pagination justify-content-center">
+  	{% if pagination.currentstep > pagination.firststep %}
+	    <li class="page-item">
+	      <a class="page-link" href="index.php?p={{ current_page }}&page={{ pagination.previous }}" aria-label="Previous">
+			  <span aria-hidden="true">&laquo;</span>
+			  <span class="sr-only">Previous</span>
+	      </a>
+	    </li>
+		{% else %}
+	    <li class="page-item disabled">
+	      <span class="page-link">
+			<span aria-hidden="true">&laquo;</span>
+			<span class="sr-only">Next</span>
+	      </span>
+	    </li>
+    {% endif %}
+
+    {% if pagination.steps and pagination.laststep > pagination.firsteps %}
+		
+			{% if pagination.beginstep > pagination.firststep %}
+				<li class="page-item"><a class="page-link" href="index.php?p={{ current_page }}&page={{ pagination.firststep }}">{{ pagination.firststep }}</a></li>
+				<li class="page-item disabled"><span class="page-link">...</span></li>
+			{% endif %}
+	
+	    {% for i in pagination.beginstep..pagination.endstep%}
+	    	{% if pagination.currentstep == i %}
+					<li class="page-item active "><span class="page-link">{{ i }}</span></li>
+	    	{% else %}
+					<li class="page-item"><a class="page-link" href="index.php?p={{ current_page }}&page={{ i }}">{{ i }}</a></li>
+			{% endif %}
+	    {% endfor %}
+
+	    {% if pagination.endstep < pagination.laststep %}
+				<li class="page-item disabled"><span class="page-link">...</span></li>
+				<li><a class="page-link" href="index.php?p={{ current_page }}&page={{ pagination.laststep }}">{{ pagination.laststep }}</a></li>
+	    {% endif %}
+	  {% endif %}
+
+    {% if pagination.currentstep < pagination.laststep %}
+		<li class="page-item">
+	      <a class="page-link" href="index.php?p={{ current_page }}&page={{ pagination.next }}" aria-label="Next">
+			  <span aria-hidden="true">&raquo;</span>
+			  <span class="sr-only">Next</span>
+	      </a>
+	    </li>
+		{% else %}
+	    <li class="page-item disabled">
+	      <span class="page-link">
+			<span aria-hidden="true">&raquo;</span>
+			<span class="sr-only">Next</span>
+	      </span>
+	    </li>
+    {% endif %}
+  </ul>
+</nav>
+{% endif %}

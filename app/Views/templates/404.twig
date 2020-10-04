@@ -1,0 +1,24 @@
+{% extends 'layouts/default.twig' %}
+
+{% block head %}
+
+    <title>404 Not Found</title>
+
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1 class="jumbotron-heading">Error 404</h1>
+                <p class="lead text-muted">Something short and leading about the collection below—its contents, the
+                    creator,
+                    etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
+                <p>
+                    <a href="index.php" class="btn btn-primary">Animes</a>
+                    <a href="index.php?p=manga.index" class="btn btn-secondary">Mangas</a>
+                </p>
+            </div>
+        </section>
+    </div>
+{% endblock %}

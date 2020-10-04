@@ -1,0 +1,162 @@
+<!-- BUTTON FORM -->
+<!-- SUBMIT BUTTON -->
+{% macro submit(label, options = []) %}
+	<div class="form-group">
+		<button type="submit" class="btn btn-primary {{ options.class }}">{{ label }}</button>
+	</div>
+{% endmacro %}
+
+<!-- HIDDEN INPUT -->
+{% macro hidden(name, value) %}
+	<input type="hidden" name="{{ name }}" value="{{ value }}"/>
+{% endmacro %}
+
+<!-- LABEL FORM -->
+<!-- LABEL BLOC -->
+{% macro label_bloc(name, label) %}
+<div>
+    <label for="{{ name }}">{{ label }}</label>
+</div>
+{% endmacro %}
+
+<!-- INPUT FORM -->
+<!-- TEXT INPUT -->
+{% macro input(name, label, options) %}
+	<div class="form-group {{ options.class }}">
+		<label for="{{ name }}">{{ label }}</label>
+		<input type="{{ options.type ?: 'text' }}"
+			   class="form-control"
+			   id="{{ name }}"
+			   name="{{ name }}"
+			   value="{{ options.value }}"
+			   placeholder="{{ options.placeholder }}"
+				{{ options.attributes }}>
+	</div>
+{% endmacro %}
+
+<!-- TEXTAREA INPUT -->
+{% macro textarea(name, label, options = []) %}
+	<div class="form-group {{ options.class }}">
+		<label for="{{ name }}">{{ label }}</label>
+		<textarea type="text"
+				  class="form-control"
+				  id="{{ name }}"
+				  name="{{ name }}"
+				  rows="{{ options.row }}"
+				  placeholder="{{ options.placeholder }}"
+                {{ options.attributes }}>{{ options.value }}</textarea>
+	</div>
+{% endmacro %}
+
+<!-- DROPDOWN -->
+{% macro select(name, label, list = [], options = []) %}
+<select class="form-control {{ options.class }}"
+		id="{{ name }}"
+		name="{{ name }}"
+		{{ options.attributes }}>
+	{% for key, item in list %}
+		<option value="{{ key }}" {{ key in options.selected ? ' selected' }}>{{ item }}</option>
+	{% endfor%}
+</select>
+{% endmacro %}
+
+{% macro select_horizontal(name, label, list = [], options = []) %}
+	<div class="form-group {{ options.class }}">
+		<label for="{{ name }}">{{ label }}</label>
+		<select class="form-control"
+				id="{{ name }}"
+				name="{{ name }}"
+				{{ options.attributes }}>
+		{% for key, item in list %}
+			<option value="{{ key }}" {{ key in options.selected ? ' selected' }}>{{ item }}</option>
+		{% endfor%}
+		</select>
+	</div>
+{% endmacro %}
+
+<!-- CHECKBOX -->
+{% macro checkbox(name, label, options = [], labelClass = '') %}
+	<label class="{{ labelClass }}">
+		<input type="checkbox"
+			   id="{{ name }}"
+			   name="{{ name }}"
+				{{ options.attributes }}> {{ label }}</label>
+{% endmacro %}
+
+<!-- CHECKBOX HORIZONTAL -->
+{% macro checkbox_horizontal(checkboxes = []) %}
+{% import _self as form %}
+
+	{% for checkbox in checkboxes %}
+	<div class="checkbox {{ checkbox.options.attributes }}">
+		{{ form.checkbox(checkbox.name, checkbox.label, checkbox.options) }}
+	</div>
+	{% endfor %}
+{% endmacro %}
+
+<!-- CHECKBOX HORIZONTAL WITH LABEL -->
+{% macro checkbox_horizontal_with_label(name, label, checkboxes = []) %}
+{% import _self as form %}
+
+	{{ form.label_bloc(name, label) }}
+	{{ form.checkbox_horizontal(checkboxes)}}
+{% endmacro %}
+
+<!-- CHECKBOX INLINE -->
+{% macro checkbox_inline(checkboxes = []) %}
+{% import _self as form %}
+
+	{% for checkbox in checkboxes %}
+		{{ form.checkbox(checkbox.name, checkbox.label, checkbox.options, 'checkbox-inline '~checkbox.options.attributes) }}
+	{% endfor %}
+{% endmacro %}
+
+<!-- CHECKBOX INLINE WITH LABEL-->
+{% macro checkbox_inline_with_label(name, label, checkboxes = []) %}
+{% import _self as form %}
+
+	{{ form.label_bloc(name, label) }}
+	{{ form.checkbox_inline(checkboxes)}}
+{% endmacro %}
+
+<!-- RADIO -->
+{% macro radio(name, label, options = [], labelClass = '') %}
+	<label class="{{ labelClass }}">
+    	<input type="radio" name="{{ name }}" id="{{ name }}" value="{{ option.value }}" {{ options.attributes }}> {{ label }}</label>
+{% endmacro %}
+
+<!-- RADIO HORIZONTAL-->
+{% macro radio_horizontal(name, radios = []) %}
+{% import _self as form %}
+
+	{% for radio in radios %}
+	<div class="radio {{ radio.options.attributes }}">
+		{{ form.radio(name, radio.label, radio.options) }}
+	</div>
+	{% endfor %}
+{% endmacro %}
+
+<!-- RADIO HORIZONTAL WITH LABEL -->
+{% macro radio_horizontal_with_label(name, label, radios = []) %}
+{% import _self as form %}
+
+	{{ form.label_bloc(name, label) }}
+	{{ form.radio_horizontal(name, radios)}}
+{% endmacro %}
+
+<!-- RADIO INLINE -->
+{% macro radio_inline(name, radios = []) %}
+{% import _self as form %}
+
+	{% for radio in radios %}
+		{{ form.radio(name, radio.label, radio.options, 'radio-inline '~radio.options.attributes) }}
+	{% endfor %}
+{% endmacro %}
+
+<!-- RADIO INLINE WITH LABEL -->
+{% macro radio_inline_with_label(name, label, radios = []) %}
+{% import _self as form %}
+
+	{{ form.label_bloc(name, label) }}
+	{{ form.radio_inline(name, radios)}}
+{% endmacro %}

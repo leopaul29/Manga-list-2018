@@ -1,0 +1,64 @@
+{# for ANIME LISTING #}
+{% macro dropdownAnimeStatus(anime) %}
+    {# not able to update an ANIME already FINISHED #}
+    {% if anime.status == '1' %}
+        <button class="btn btn-secondary bg-{{ colorStatus(anime.status) }}"
+                type="button">
+            {{ labelStatus(anime.status) }}
+        </button>
+    {% else %}
+        {# update status dropdown #}
+        <div class="dropdown">
+            {# display status label #}
+            <button class="btn btn-secondary dropdown-toggle bg-{{ colorStatus(anime.status) }}"
+                    type="button"
+                    id="dropdownMenuButtonStatus{{ anime.id }}" data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false">
+                {{ labelStatus(anime.status) }}
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonStatus{{ anime.id }}">
+                {% for i in [3, 2, 5, 4, 1] %}
+                    {# display all other status label as choice #}
+                    {% if i != anime.status %}
+                        <a class="dropdown-item bg-{{ getStatusColors()[i] }} text-white" href="#"
+                           onclick="setStatusRemove({{ anime.id }}, {{ i }})">{{ getStatusLabels()[i] }}</a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+{% endmacro %}
+
+{# for SHOW MANGA page #}
+{% macro dropdownAnimeStatusForManga(anime) %}
+    {# update status dropdown #}
+    <div class="dropdown">
+        {# display status label #}
+        <button class="btn btn-secondary dropdown-toggle bg-{{ colorStatus(anime.status) }}"
+                type="button"
+                id="dropdownMenuButtonStatus{{ anime.id }}" data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false">
+            {{ labelStatus(anime.status) }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonStatus{{ anime.id }}">
+            {% for i in [3, 2, 5, 4, 1] %}
+                {# display all other status label as choice #}
+                {% if i != anime.status %}
+                    {# build on form for each status available on show page #}
+                    <form id="formUpdateStatus{{ i }}" action="index.php?p=anime.updateStatus&id={{ anime.id }}&status={{ i }}&id_manga_ref={{ anime.id_manga_ref }}" method="POST">
+                    <a class="dropdown-item bg-{{ getStatusColors()[i] }} text-white" href="#"
+                       onclick="document.querySelector('#formUpdateStatus{{ i }}').submit()">{{ getStatusLabels()[i] }}</a>
+                    </form>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro columnAnimeEditable(anime, field, numberToDisplay) %}
+    <a href="#" onclick="remove({{ anime.id }}, '{{ field }}')" class="badge badge-light">-</a>
+    <span id="{{ field }}{{ anime.id }}">{{ numberToDisplay }}</span>
+    <a href="#" onclick="add({{ anime.id }}, '{{ field }}')" class="badge badge-light">+</a>
+{% endmacro %}

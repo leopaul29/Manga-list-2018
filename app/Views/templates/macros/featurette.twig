@@ -1,0 +1,80 @@
+{% macro displayInfoManga(title, description, image) %}
+<div class="row featurette info-manga">
+    <div class="col-md-6 order-md-2">
+        <h2 class="featurette-heading">{{ title }}</h2>
+        <p class="lead">{{ description }}</p>
+    </div>
+    <div class="col-md-5 order-md-1">
+        <img class="featurette-image img-fluid mx-auto" style="height: 500px;" src="{{ image }}"
+             data-holder-rendered="true">
+    </div>
+</div>
+{% endmacro %}
+
+{% macro displayRight(list, status, title) %}
+<div class="row featurette">
+    <div class="col-md-7 order-md-1">
+        <h2 class="featurette-heading">{{ title }}</h2>
+        <table class="table">
+            <thead>
+            <th scope="col" class="col-sm-1">#</th>
+            <th scope="col" class="col-sm-5">Title</th>
+            <th scope="col" class="col-sm-1">Saison</th>
+            <th scope="col" class="col-sm-1">Number episodes</th>
+            </thead>
+            <tbody>
+            {% for anime in list %}
+                <tr onmouseover="displayImageLink('{{ status }}', '{{ anime.image }}', '{{ anime.url }}')">
+                    <th scope="row">{{ anime.id }}</th>
+                    <td>{{ anime.title }}{% if anime.title_original %} : {{ anime.title_original }}{% endif %}</td>
+                    <td>{{ anime.saison }}</td>
+                    <td>{{ anime.nb_episodes }}</td>
+                </tr>
+            {% endfor %}
+            {{ lastImage }}
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-5 order-md-2">
+        <!-- url to update -->
+        <a id="{{ status }}Url" href="{{ list[0].url }}">
+            <img id="{{ status }}Image" alt="200x300" style="height: 500px;"
+                 src="{{ list[0].image }}">
+        </a>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro displayLeft(list, status, title) %}
+    <div class="row featurette">
+        <div class="col-md-7 order-md-2">
+            <h2 class="featurette-heading">{{ title }}</h2>
+            <table class="table">
+                <thead>
+                <th scope="col" class="col-sm-1">#</th>
+                <th scope="col" class="col-sm-5">Title</th>
+                <th scope="col" class="col-sm-1">Saison</th>
+                <th scope="col" class="col-sm-1">Number episodes</th>
+                </thead>
+                <tbody>
+                {% for anime in list %}
+                    <tr onmouseover="displayImageLink('{{ status }}', '{{ anime.image }}', '{{ anime.url }}')">
+                        <th scope="row">{{ anime.id }}</th>
+                        <td>{{ anime.title }}{% if anime.title_original %} : {{ anime.title_original }}{% endif %}</td>
+                        <td>{{ anime.saison }}</td>
+                        <td>{{ anime.nb_episodes }}</td>
+                    </tr>
+                {% endfor %}
+                {{ lastImage }}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-5 order-md-1">
+            <!-- url to update -->
+            <a id="{{ status }}Url" href="{{ list[0].url }}">
+                <img id="{{ status }}Image" alt="200x300" style="height: 500px;"
+                     src="{{ list[0].image }}">
+            </a>
+        </div>
+    </div>
+{% endmacro %}

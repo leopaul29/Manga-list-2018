@@ -1,0 +1,56 @@
+{% extends 'layouts/default.twig' %}
+
+{% block content %}
+    <div id="anime">
+        <a id="animeUrl" href="#"><img id="animeImage" src=""></a>
+    </div>
+
+    <div class="container">
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col" class="col-sm-1">#</th>
+                <th scope="col" class="col-sm-5">Title</th>
+                <th scope="col" class="col-sm-1">Saison</th>
+                <th scope="col" class="col-sm-1">Number episodes</th>
+                <th scope="col" class="col-sm-1">Number film</th>
+                <th scope="col" class="col-sm-1">Number OAV</th>
+                <th scope="col" class="col-sm-2">Status</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for anime in animes %}
+                <tr id="anime{{ anime.id }}" class="fade show"
+                    onmouseover="displayImageLink('anime', '{{ anime.image }}', '{{ anime.url }}')">
+                    <th scope="row">
+                        {{ anime.id }}
+                    </th>
+                    <td>{{ anime.title }}{% if anime.title_original %} : {{ anime.title_original }}{% endif %}</td>
+                    <td>{{ anime.saison }}</td>
+                    {% if isEditable %}
+                        <td>{{ utils.columnAnimeEditable(anime, 'nb_episodes', anime.nb_episodes) }}</td>
+                        <td>{{ utils.columnAnimeEditable(anime, 'nb_film', anime.nb_film) }}</td>
+                        <td>{{ utils.columnAnimeEditable(anime, 'nb_oav', anime.nb_oav) }}</td>
+                    {% else %}
+                        <td>{{ anime.nb_episodes }}</td>
+                        <td>{{ anime.nb_film }}</td>
+                        <td>{{ anime.nb_oav }}</td>
+                    {% endif %}
+                    <td>{{ utils.dropdownAnimeStatus(anime) }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        {% embed "components/_pagination.twig" %} {% endembed %}
+
+    </div>
+{% endblock %}
+
+{% block jsfooter %}
+    <script src="js/ajax.js"></script>
+{% endblock %}
+
+

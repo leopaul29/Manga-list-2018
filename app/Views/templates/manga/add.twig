@@ -1,0 +1,53 @@
+{% extends 'layouts/default.twig' %}
+
+{% block head %}
+
+    <title>Add Manga</title>
+
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        <!-- handle manga result creation -->
+        {% if create_manga.res %}
+            <div class="alert alert-success" role="alert">
+                <b>Manga created :</b> <a href="{{ create_manga.manga.url }}">{{ create_manga.manga.title }} ({{ create_manga.manga.id }})</a>
+
+                <!-- handle anime result creation -->
+            {% if create_anime.res %}
+               - Saison {{ create_anime.anime.saison }} : {{ create_anime.anime.nb_episodes }} episode(s)
+            {% endif %}
+            </div>
+            <!-- /alert -->
+        {% endif %}
+
+        <form action="index.php?p=manga.create" method="POST">
+            <div class="row">
+                <div class="col">
+                    <h2 class="text-center">Manga</h2>
+
+                    <!-- Add Manga Form component -->
+                    {% embed "components/addMangaForm.twig" %} {% endembed %}
+
+                </div>
+                <!-- /col manga -->
+
+                <div class="col">
+                    <h2 class="text-center">Anime</h2>
+
+                    <!-- Add Anime from Manga Form component -->
+                    {% embed "components/addAnimeFromMangaForm.twig" %} {% endembed %}
+
+                </div>
+                <!-- /col anime -->
+            </div>
+            <!-- /row -->
+
+            <!-- on right side -->
+            <button type="submit" class="btn btn-primary pull-right">Submit</button>
+        </form>
+
+    </div>
+    <!-- /container -->
+{% endblock %}
