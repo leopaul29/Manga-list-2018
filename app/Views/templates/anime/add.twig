@@ -1,0 +1,40 @@
+{% extends 'layouts/default.twig' %}
+
+{% block head %}
+
+    <title>Add Anime</title>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+
+        <!-- handle result creation -->
+        {% if param.create_anime %}
+            <div class="alert alert-success" role="alert">
+                <b>Anime created :</b> id_manga_ref({{ param.create_anime.anime.id_manga_ref }}) -
+                Saison {{ param.create_anime.anime.saison }} : {{ param.create_anime.anime.nb_episodes }} episodes
+            </div>
+            <!-- /alert -->
+        {% endif %}
+
+        <form action="index.php?p=anime.create" method="POST">
+            <h2>Add Anime</h2>
+
+            <!-- Add Anime Full Form component -->
+            {% embed "components/addAnimeFullForm.twig" %} {% endembed %}
+
+
+            <!-- on right side -->
+            <div class="form-group row">
+                <div class="col-sm-7">
+                    <button type="submit" class="btn btn-primary pull-right">Submit</button>
+                </div>
+            </div>
+            <!-- /row -->
+        </form>
+
+    </div>
+    <!-- /container -->
+{% endblock %}

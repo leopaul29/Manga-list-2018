@@ -1,0 +1,25 @@
+{% macro setFooterDownPageStyleDefault() %}
+  {% import _self as style %}
+
+  {{ style.setFooterDownPageStyle('100px;', '160px;') }}
+{% endmacro %}
+
+{% macro setFooterDownPageStyle(headerHeight, footerHeight) %}
+  <style type="text/css">
+    html {
+      height: 100%;
+    }
+    body {
+      min-height: 100%;
+      position: relative;
+      padding-bottom: {{ footerHeight }};
+      padding-top: {{ headerHeight }};
+    }
+    footer {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+  </style>
+{% endmacro %}

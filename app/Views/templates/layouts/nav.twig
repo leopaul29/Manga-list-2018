@@ -1,0 +1,54 @@
+{% block header %}
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="index.php?p=home.index">Manga List</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item {{ activeClass("anime.currentSaison") }}">
+                    <a class="nav-link text-info" href="index.php?p=anime.currentSaison">Current Saison</a>
+                </li>
+                <li class="nav-item {{ activeClass("anime.inprogress") }}">
+                    <a class="nav-link text-success" href="index.php?p=anime.inprogress">In progress</a>
+                </li>
+                <li class="nav-item {{ activeClass("anime.onbreak") }}">
+                    <a class="nav-link text-warning" href="index.php?p=anime.onbreak">On break</a>
+                </li>
+                <li class="nav-item {{ activeClass("anime.mustsee") }}">
+                    <a class="nav-link text-secondary" href="index.php?p=anime.mustsee">Must see</a>
+                </li>
+                <li class="nav-item {{ activeClass("anime.finished") }}">
+                    <a class="nav-link text-danger" href="index.php?p=anime.finished">Finished</a>
+                </li>
+                <li class="nav-item {{ activeClass("manga.index") }}">
+                    <a class="nav-link text-white" href="index.php?p=manga.index">Manga</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Settings
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="index.php?p=manga.add">Add new manga</a>
+                        <a class="dropdown-item" href="index.php?p=anime.add">Add new anime</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="index.php?p=home.top">Top Manga</a>
+                        <a class="dropdown-item" href="index.php?p=home.stat">Statistic</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="index.php?p=home.formatImages" target="_blank">Rename images</a>
+                        <a class="dropdown-item" href="index.php?p=home.generateFileListManga" target="_blank">Generate
+                            file</a>
+                    </div>
+                </li>
+            </ul>
+            <form class="form-inline mt-2 mt-md-0" action="index.php" method="get">
+                <input type="hidden" id="p" name="p" value="manga.search">
+                <input class="form-control mr-sm-2" placeholder="Search" aria-label="Search"
+                       type="search" id="search" name="search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+{% endblock %}

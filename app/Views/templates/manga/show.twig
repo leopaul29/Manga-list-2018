@@ -1,0 +1,60 @@
+{% extends 'layouts/default.twig' %}
+{% import 'macros/featurette.twig' as featurette %}
+
+{% block head %}
+
+    <title>{{ manga.title }}</title>
+
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        <!-- display information manga -->
+        {{ featurette.displayInfoManga(manga.title, manga.description, manga.image) }}
+
+        {% if animes is not empty %}
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Saison</th>
+                    <th scope="col">Number of episodes</th>
+                    <th scope="col">Number of film</th>
+                    <th scope="col">Number of OAV</th>
+                    <th scope="col">Status</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for anime in animes %}
+                    <tr id="anime{{ anime.id }}" class="fade show ">
+                        <th scope="row">{{ anime.id }}</th>
+                        <td>{{ anime.title }}{% if anime.title_original %} : {{ anime.title_original }}{% endif %}</td>
+                        <td>{{ anime.saison }}</td>
+                        <!-- fields editable -->
+                        <td>{{ utils.columnAnimeEditable(anime, 'nb_episodes', anime.nb_episodes) }}</td>
+                        <td>{{ utils.columnAnimeEditable(anime, 'nb_film', anime.nb_film) }}</td>
+                        <td>{{ utils.columnAnimeEditable(anime, 'nb_oav', anime.nb_oav) }}</td>
+                        <td>{{ utils.dropdownAnimeStatusForManga(anime) }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addAnimeModalForm">
+            Add new anime
+        </button>
+
+        <!-- Add Anime Modal Form component -->
+        {% embed "components/addAnimeModalForm.twig" %} {% endembed %}
+    </div>
+{% endblock %}
+
+{% block jsfooter %}
+    <script src="js/ajax.js"></script>
+{% endblock %}

@@ -1,0 +1,33 @@
+body {
+    /* for the menu bar in absolute */
+    padding-top: 48px;
+}
+footer {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    margin-top: 40px;
+    border-top: 1px solid #eee;
+}
+
+.container {
+    margin-top: 3rem;
+}
+
+.info-manga {
+    margin-bottom: 50px;
+}
+
+
+/* avater image in anime list */
+#anime {
+    position: absolute;
+    height: 300px;
+    width: 200px;
+    display: block;
+    margin-left: 25px;
+    color: black;
+}
+
+#animeImage {
+    width: 200px;
+}

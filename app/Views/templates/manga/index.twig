@@ -1,0 +1,36 @@
+{% extends 'layouts/default.twig' %}
+
+{% block head %}
+
+    <title>All Manga</title>
+
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        <div class="row">
+
+            {% for manga in mangas %}
+            <div class="col-lg-4 text-center">
+                <a href="{{ manga.url }}"><img class="rounded-circle" src="{{ manga.image }}"
+                                               alt="Generic placeholder image" width="140" height="140"></a>
+                <h2>{{ manga.title }}</h2>
+                <p>{{ manga.extrait }}</p>
+                <!--<p><a class="btn btn-secondary" href="index.php?p=manga.show&id={{ manga.id }}" role="button">View details
+                        »</a></p>-->
+            </div>
+
+            {% if loop.index is divisibleby(3) %}
+        </div>
+        <div class="row">
+            {% endif %}
+
+            {% endfor %}
+
+        </div>
+
+        {% embed "components/_pagination.twig" %} {% endembed %}
+
+    </div>
+{% endblock %}
